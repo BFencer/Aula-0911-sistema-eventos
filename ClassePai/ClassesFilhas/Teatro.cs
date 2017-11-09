@@ -4,17 +4,18 @@ using System.Text;
 
 namespace ProjetoEvento.ClassePai.ClassesFilhas
 {
-    public class Show : Evento
+    public class Teatro : Evento
     {
-        public string Artista { get; set; }
-        public string GeneroMusical { get; set; }
+        public string[] Elenco { get; set; }
 
-        public Show()
+        public string Diretor { get; set; }
+
+        public Teatro()
         {
 
         }
 
-        public Show(string titulo, string Local, int Lotacao, string Duracao, int Classificacao, DateTime Data, string Artista, string GeneroMusical)
+        public Teatro(string titulo, string Local, int Lotacao, string Duracao, int Classificacao, DateTime Data, string[] Elenco, string Diretor)
         {
 
             base.Titulo = Titulo;
@@ -24,8 +25,8 @@ namespace ProjetoEvento.ClassePai.ClassesFilhas
             base.Classificacao = Classificacao;
             base.Data = Data;
 
-            this.Artista = Artista;
-            this.GeneroMusical = GeneroMusical;
+            this.Elenco = Elenco;
+            this.Diretor = Diretor;
 
         }
 
@@ -36,8 +37,12 @@ namespace ProjetoEvento.ClassePai.ClassesFilhas
             StreamWriter arquivo = null;
             try
             {
-                arquivo = new StreamWriter("show.csv", true);
-                arquivo.WriteLine(Titulo + ";" + Local + ";" + Duracao + ";" + Data + ";" + Artista + ";" + GeneroMusical + ";" + Lotacao + ";" + Classificacao);
+                string Elenco = "";
+                for(int i = 0; i < this.Elenco.Length; i++){
+                    Elenco += this.Elenco[i] + "-"; 
+                }
+                arquivo = new StreamWriter("teatro.csv", true);
+                arquivo.WriteLine(Titulo + ";" + Local + ";" + Duracao + ";" + Data + ";" + Elenco + ";" + Diretor + ";" + Lotacao + ";" + Classificacao);
                 efetuado = true;
             }
             catch (Exception ex)
